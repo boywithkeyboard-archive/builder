@@ -8,7 +8,7 @@ console.log(argv)
 const esm = argv.esm === true
 , cjs = argv.cjs === true
 
-, entryPoint = argv._[0] ?? './mod.ts'
+, entryPoint = argv._[0] ?? './index.ts'
 
 if (esm) {
   await build({
@@ -18,7 +18,7 @@ if (esm) {
     allowOverwrite: true,
     format: 'esm',
     platform: 'node',
-    outfile: './dist/index.mjs'
+    outfile: entryPoint.endsWith('mod.ts') ? './dist/mod.mjs' : './dist/index.mjs'
   })
 }
 
@@ -30,6 +30,6 @@ if (cjs) {
     allowOverwrite: true,
     format: 'cjs',
     platform: 'node',
-    outfile: './dist/index.cjs'
+    outfile: entryPoint.endsWith('mod.ts') ? './dist/mod.cjs' : './dist/index.cjs'
   })
 }
