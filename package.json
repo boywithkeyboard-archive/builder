@@ -1,6 +1,6 @@
 {
   "name": "@boywithkeyboard/builder",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "author": "Samuel Kopp (https://samuelkopp.de)",
   "license": "MIT",
   "description": "A simple builder for TypeScript.",
@@ -11,7 +11,7 @@
     "./dist/main.mjs"
   ],
   "scripts": {
-    "build": "esbuild ./main.ts --bundle --minify --format=esm --external:esbuild --banner:js=\"#!/usr/bin/env node\" --outfile=./dist/main.mjs"
+    "build": "esbuild ./main.ts --bundle --minify --format=esm --platform=node --external:esbuild --banner:js=\"#!/usr/bin/env node\" --outfile=./dist/main.mjs"
   },
   "dependencies": {
     "esbuild": "^0.19.5"
@@ -20,6 +20,7 @@
     "@types/minimist": "^1.2.4",
     "@types/node": "^20.8.9",
     "minimist": "^1.2.8",
+    "rimraf": "^5.0.5",
     "typescript": "^5.2.2"
   },
   "engines": {

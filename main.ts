@@ -1,5 +1,6 @@
 import { build } from 'esbuild'
 import minimist from 'minimist'
+import { rimraf } from 'rimraf'
 
 const argv = minimist(process.argv.slice(2))
 
@@ -9,6 +10,8 @@ const esm = argv.esm === true
 , cjs = argv.cjs === true
 
 , entryPoint = argv._[0] ?? './index.ts'
+
+await rimraf('./dist')
 
 if (esm) {
   await build({
