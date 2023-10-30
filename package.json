@@ -1,11 +1,11 @@
 {
   "name": "@boywithkeyboard/builder",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "author": "Samuel Kopp (https://samuelkopp.de)",
   "license": "MIT",
   "description": "A simple builder for TypeScript.",
   "bin": {
-    "builder": "./dist/main.mjs"
+    "builder": "dist/main.mjs"
   },
   "files": [
     "./dist/main.mjs"

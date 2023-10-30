@@ -4,9 +4,7 @@ import { rimraf } from 'rimraf'
 
 const argv = minimist(process.argv.slice(2))
 
-console.log(argv)
-
-const esm = argv.esm === true
+, esm = argv.esm === true
 , cjs = argv.cjs === true
 
 , entryPoint = argv._[0] ?? './index.ts'
