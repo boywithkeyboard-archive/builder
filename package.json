@@ -1,6 +1,6 @@
 {
   "name": "@boywithkeyboard/builder",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "author": "Samuel Kopp (https://samuelkopp.de)",
   "license": "MIT",
   "description": "A simple builder for TypeScript.",
