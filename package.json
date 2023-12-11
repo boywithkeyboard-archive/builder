@@ -16,7 +16,7 @@
     "check": "tsc"
   },
   "dependencies": {
-    "esbuild": "^0.19.8"
+    "esbuild": "^0.19.9"
   },
   "devDependencies": {
     "@types/minimist": "^1.2.5",
