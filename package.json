@@ -20,7 +20,7 @@
   },
   "devDependencies": {
     "@types/minimist": "^1.2.5",
-    "@types/node": "^20.11.20",
+    "@types/node": "^20.11.25",
     "minimist": "^1.2.8",
     "rimraf": "^5.0.5",
     "typescript": "^5.3.3"
