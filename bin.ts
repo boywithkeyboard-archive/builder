@@ -1,7 +1,9 @@
 import { buildSync } from 'esbuild'
 import { copySync, ensureFileSync } from 'fs-extra'
 import minimist from 'minimist'
+import { execSync } from 'node:child_process'
 import { copyFileSync, readFileSync, writeFileSync } from 'node:fs'
+import { join } from 'node:path'
 import { rimrafSync } from 'rimraf'
 
 const argv = minimist(process.argv.slice(2))
@@ -105,3 +107,13 @@ for (const [input, output] of Object.entries(pairs)) {
     )
   }
 }
+
+// autocorrect package.json syntax issues
+
+execSync('npm pkg fix', {
+  cwd: join(process.cwd(), './build')
+})
+
+// generate type declarations
+
+execSync('npx tsc')
