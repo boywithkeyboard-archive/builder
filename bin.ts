@@ -10,7 +10,7 @@ const argv = minimist(process.argv.slice(2))
 
 , node = argv.node !== undefined
 
-let minimumNodeVersion = '18'
+let minimumNodeVersion = '20.0.0'
 
 if (node && typeof argv.node === 'string') {
   minimumNodeVersion = argv.node
