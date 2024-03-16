@@ -24,13 +24,13 @@ for (const pair of argv._) {
   pairs[arr[0]] = arr[1]
 }
 
-rimrafSync('./build')
+rimrafSync('./.build')
 
 // copy important files
 
-copySync('./license', './build/license')
-try { copyFileSync('./package-lock.json', './build/package-lock.json') } catch (err) {}
-copyFileSync('./readme.md', './build/readme.md')
+copySync('./license', './.build/license')
+try { copyFileSync('./package-lock.json', './.build/package-lock.json') } catch (err) {}
+copyFileSync('./readme.md', './.build/readme.md')
 
 // generate final package.json
 
@@ -71,14 +71,14 @@ for (const output of Object.values(pairs)) {
 packageJson.exports = exports
 
 writeFileSync(
-  './build/package.json',
+  './.build/package.json',
   JSON.stringify(packageJson, null, 2)
 )
 
 // build code
 
 for (const [input, output] of Object.entries(pairs)) {
-  const outfile = './build/' + output
+  const outfile = './.build/' + output
 
   ensureFileSync(outfile)
 
@@ -97,12 +97,12 @@ for (const [input, output] of Object.entries(pairs)) {
     const dir = output.split('/')[0]
 
     writeFileSync(
-      './build/' + dir + '/package.json',
+      './.build/' + dir + '/package.json',
       JSON.stringify({
         main: './' + output,
         module: './' + output,
         types: './' + output.replace('.js', '.d.ts'),
-        type: 'esm'
+        type: 'module'
       }, null, 2)
     )
   }
@@ -111,7 +111,7 @@ for (const [input, output] of Object.entries(pairs)) {
 // autocorrect package.json syntax issues
 
 execSync('npm pkg fix', {
-  cwd: join(process.cwd(), './build')
+  cwd: join(process.cwd(), './.build')
 })
 
 // generate type declarations
