@@ -24,21 +24,22 @@ for (const pair of argv._) {
   pairs[arr[0]] = arr[1]
 }
 
-rimrafSync('./.build')
+rimrafSync('./build')
 
 // copy important files
 
-copySync('./license', './.build/license')
-try { copyFileSync('./package-lock.json', './.build/package-lock.json') } catch (err) {}
-copyFileSync('./readme.md', './.build/readme.md')
+copySync('./license', './build/license')
+try { copyFileSync('./package-lock.json', './build/package-lock.json') } catch (err) {}
+copyFileSync('./readme.md', './build/readme.md')
 
 // generate final package.json
 
 const packageJson = JSON.parse(readFileSync('./package.json', { encoding: 'utf-8' }))
 
-packageJson.engines = {
-  ...packageJson.engines,
-  node: '>=' + minimumNodeVersion
+if (!packageJson.engines) {
+  packageJson.engines = {
+    node: '>=' + minimumNodeVersion
+  }
 }
 
 packageJson.type = 'module'
@@ -71,19 +72,27 @@ for (const output of Object.values(pairs)) {
 packageJson.exports = exports
 
 writeFileSync(
-  './.build/package.json',
+  './build/package.json',
   JSON.stringify(packageJson, null, 2)
 )
 
+const tsConfig = JSON.parse(readFileSync('./tsconfig.json', { encoding: 'utf-8' }))
+
 // build code
 
-for (const [input, output] of Object.entries(pairs)) {
-  const outfile = './.build/' + output
+for (let [input, output] of Object.entries(pairs)) {
+  const outfile = './build/' + output
+
+  input = './' + input
+
+  if (tsConfig.compilerOptions?.rootDir) {
+    input = input.replace('./', './' + tsConfig.compilerOptions.rootDir)
+  }
 
   ensureFileSync(outfile)
 
   buildSync({
-    entryPoints: ['./' + input],
+    entryPoints: [input],
     bundle: true,
     minify: true,
     allowOverwrite: true,
@@ -97,7 +106,7 @@ for (const [input, output] of Object.entries(pairs)) {
     const dir = output.split('/')[0]
 
     writeFileSync(
-      './.build/' + dir + '/package.json',
+      './build/' + dir + '/package.json',
       JSON.stringify({
         main: './' + output,
         module: './' + output,
@@ -111,7 +120,7 @@ for (const [input, output] of Object.entries(pairs)) {
 // autocorrect package.json syntax issues
 
 execSync('npm pkg fix', {
-  cwd: join(process.cwd(), './.build')
+  cwd: join(process.cwd(), './build')
 })
 
 // generate type declarations
