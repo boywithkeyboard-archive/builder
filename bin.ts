@@ -1,5 +1,5 @@
 import { buildSync } from 'esbuild'
-import { ensureDirSync, ensureFileSync } from 'fs-extra'
+import { copySync, ensureFileSync } from 'fs-extra'
 import minimist from 'minimist'
 import { copyFileSync, readFileSync, writeFileSync } from 'node:fs'
 import { rimrafSync } from 'rimraf'
@@ -22,12 +22,11 @@ for (const pair of argv._) {
   entryPoints[arr[0]] = arr[1]
 }
 
-ensureDirSync('./build')
 rimrafSync('./build')
 
 // copy important files
 
-copyFileSync('./license', './build/license')
+copySync('./license', './build/license')
 try { copyFileSync('./package-lock.json', './build/package-lock.json') } catch (err) {}
 copyFileSync('./readme.md', './build/readme.md')
 
