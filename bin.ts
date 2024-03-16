@@ -14,12 +14,12 @@ if (node && typeof argv.node === 'string') {
   minimumNodeVersion = argv.node
 }
 
-const entryPoints: Record<string, string> = {}
+const pairs: Record<string, string> = {}
 
 for (const pair of argv._) {
   const arr = pair.split(':')
 
-  entryPoints[arr[0]] = arr[1]
+  pairs[arr[0]] = arr[1]
 }
 
 rimrafSync('./build')
@@ -47,7 +47,7 @@ packageJson.types = './index.d.ts'
 
 const exports: Record<string, any> = {}
 
-for (const output of Object.values(entryPoints)) {
+for (const output of Object.values(pairs)) {
   let key = '.'
   let key2 = './'
 
@@ -75,8 +75,8 @@ writeFileSync(
 
 // build code
 
-for (const [input, output] of Object.entries(entryPoints)) {
-  const outfile = './build/' + entryPoints[output]
+for (const [input, output] of Object.entries(pairs)) {
+  const outfile = './build/' + output
 
   ensureFileSync(outfile)
 
@@ -97,9 +97,9 @@ for (const [input, output] of Object.entries(entryPoints)) {
     writeFileSync(
       './build/' + dir + '/package.json',
       JSON.stringify({
-        main: './' + entryPoints[output],
-        module: './' + entryPoints[output],
-        types: './' + entryPoints[output].replace('.js', '.d.ts'),
+        main: './' + output,
+        module: './' + output,
+        types: './' + output.replace('.js', '.d.ts'),
         type: 'esm'
       }, null, 2)
     )

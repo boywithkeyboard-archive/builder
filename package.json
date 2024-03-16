@@ -1,6 +1,6 @@
 {
   "name": "@boywithkeyboard/builder",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "author": "Samuel Kopp (https://samuelkopp.de)",
   "license": "MIT",
   "description": "A simple builder for TypeScript.",
@@ -12,7 +12,7 @@
     "build"
   ],
   "scripts": {
-    "build": "rimraf build && esbuild ./bin.ts --bundle --minify --format=esm --platform=node --external:esbuild --external:fs-extra --banner:js=\"#!/usr/bin/env node\" --outfile=./build/bin.js",
+    "build": "rimraf build && esbuild ./bin.ts --bundle --format=cjs --platform=node --external:esbuild --banner:js=\"#!/usr/bin/env node\" --outfile=./build/bin.js",
     "prepublishOnly": "npm run build",
     "check": "tsc"
   },
@@ -30,6 +30,5 @@
   },
   "engines": {
     "node": ">=20"
-  },
-  "type": "module"
+  }
 }
