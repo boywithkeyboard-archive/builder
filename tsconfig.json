@@ -1,27 +1,23 @@
 {
   "compilerOptions": {
     "target": "es2022",
-    "module": "esnext",
+    "module": "es2022",
     "lib": [
-      "esnext"
+      "es2022"
     ],
-    "allowJs": true,
-    "skipLibCheck": true,
     "strict": true,
     "declaration": true,
     "emitDeclarationOnly": true,
-    "esModuleInterop": true,
     "moduleResolution": "bundler",
-    "outDir": "dist",
+    "esModuleInterop": true,
     "resolveJsonModule": true,
-    "isolatedModules": true,
-    "incremental": true
+    "outDir": "build"
   },
   "include": [
-    "./main.ts"
+    "**/*.ts"
   ],
   "exclude": [
-    "dist",
+    "build",
     "node_modules"
   ]
 }
