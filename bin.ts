@@ -86,7 +86,7 @@ for (let [input, output] of Object.entries(pairs)) {
   input = './' + input
 
   if (tsConfig.compilerOptions?.rootDir) {
-    input = input.replace('./', './' + tsConfig.compilerOptions.rootDir)
+    input = input.replace('./', './' + tsConfig.compilerOptions.rootDir + '/')
   }
 
   ensureFileSync(outfile)
