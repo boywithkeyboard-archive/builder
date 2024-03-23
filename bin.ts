@@ -126,11 +126,3 @@ execSync('npm pkg fix', {
 // generate type declarations
 
 execSync('npx tsc')
-
-// autocopy options from package.json to package-lock.json
-
-execSync('npm i')
-
-// remove node_modules folder in build folder
-
-rimrafSync(join(process.cwd(), './build/node_modules'))
