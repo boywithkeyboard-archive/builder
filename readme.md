@@ -1,4 +1,4 @@
-## boywithkeyboard's builder
+## builder
 
 ```bash
 npm i @boywithkeyboard/builder
